@@ -1,7 +1,6 @@
 
 //this is a controller/admin.js
 
-
 export const home = (req, res) => {
 
     const products = [{
@@ -89,12 +88,15 @@ export const home = (req, res) => {
         }
     }]
 
-    
     res.render('index', { products });
 }
+
 export const about = (req, res) => {
     res.send('about')
 }
 export const login = (req, res) => {
-    res.send('login')
+    res.render('login')
+}
+export const adminPage = (req, res) => {
+    res.render('adminPage')
 }
