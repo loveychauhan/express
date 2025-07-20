@@ -8,7 +8,14 @@
 </head>
 
 <body>
-    <h1>Welcome</h1>
+    <h1>Welcome <% if(outputData) {%>
+            <span>
+                <%= outputData.name%>
+            </span>
+    </h1>
+    <p>Email <%= outputData.email%>
+    </p>
+    <%}%>
 </body>
 
 </html>

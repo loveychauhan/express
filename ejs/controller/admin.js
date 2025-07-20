@@ -98,5 +98,7 @@ export const login = (req, res) => {
     res.render('login')
 }
 export const adminPage = (req, res) => {
-    res.render('adminPage')
-}
+    console.log('Body:', req.body);  
+    res.render('adminPage', { outputData: req.body });
+};
+

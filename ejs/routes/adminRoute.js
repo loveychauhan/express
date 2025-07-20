@@ -9,5 +9,6 @@ appRouter.get('/', home)
 appRouter.get('/about', about)
 appRouter.get('/login', login)
 appRouter.get('/adminPage', adminPage)
+appRouter.post('/adminPage', adminPage)
 
 export default appRouter
