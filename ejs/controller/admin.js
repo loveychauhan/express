@@ -1,5 +1,6 @@
 
 //this is a controller/admin.js
+import fs from 'fs/promises'
 
 export const home = (req, res) => {
 
@@ -98,7 +99,16 @@ export const login = (req, res) => {
     res.render('login')
 }
 export const adminPage = (req, res) => {
-    console.log('Body:', req.body);  
+    console.log('Body:', req.body);
     res.render('adminPage', { outputData: req.body });
 };
+
+export const filesystem = async (req, res) => {
+    const data = await fs.appendFile('./node.txt', '\n\n\n\n\n\nBut i am now a beginner');
+    const files = await fs.readdir('./')
+    console.log(files)
+    console.log('running')
+    console.log('end')
+    res.send('filesystem')
+}
 
