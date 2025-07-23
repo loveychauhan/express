@@ -1,6 +1,7 @@
 
 //this is a controller/admin.js
-import fs from 'fs/promises'
+import fs from 'fs'
+// console.log(fs)
 
 export const home = (req, res) => {
 
@@ -104,11 +105,42 @@ export const adminPage = (req, res) => {
 };
 
 export const filesystem = async (req, res) => {
-    const data = await fs.appendFile('./node.txt', '\n\n\n\n\n\nBut i am now a beginner');
-    const files = await fs.readdir('./')
+    const data = await fsp.appendFile('./node.txt', '\n\n\n\n\n\nBut i am now a beginner');
+    const files = await fsp.readdir('./')
     console.log(files)
     console.log('running')
     console.log('end')
     res.send('filesystem')
+}
+
+const newData = []
+export const userForm1 = (req, res) => {
+    // newData.push(req.body)
+    const obj = req.body
+    newData.push(obj)
+    console.log(obj)
+    res.render('userForm', { newData })
+}
+
+export const userForm = (req, res) => {
+    res.render('userForm', { newData })
+}
+
+
+export const blog = (req, res) => {
+    res.render('blog.ejs', { newData: {} })
+}
+
+export const showFile = (req, res) => {
+    res.render('')
+}
+
+export const preView = (req, res) => {
+    const { title, description } = req.body
+    fs.writeFile(`./views/${title}.txt`, '', (err) => {
+        console.log(err)
+    })
+    fs.appendFile(`./views`)
+    res.render('blog.ejs', { newData: req.body })
 }
 

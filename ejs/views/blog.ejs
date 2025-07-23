@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body>
+    <form action="/blog" method="post" class="w-full max-w-[540px] mx-auto my-5">
+        <div class="my-2 w-full">
+            <label for="title">Title</label>
+            <input type="text" id="name" name="title" placeholder="Enter Title"
+                class="outline-0 border-[1px] rounded-[5px] p-1 w-full">
+        </div>
+        <div class="my-2">
+            <label for="description">Description</label>
+            <input type="text" id="description" name="description"
+                class="outline-0 border-[1px] rounded-[5px] p-1 w-full">
+        </div>
+
+        <button type="submit" class="py-1 px-2.5 w-full bg-amber-300 outline-0 rounded-[10px]">Submit</button>
+    </form>
+
+    <div class="w-full max-w-[540px] mx-auto my-5">
+        <%if(newData){%>
+            <h1>
+                <%=newData?.title%>
+                    <a class="text-blue" href='./'>
+                        <%if(newData){%>
+                            ReadMore
+                            <%}%>
+                    </a>
+            </h1>
+            <%}else{%>
+                <h1>no Data Available</h1>
+                <%}%>
+    </div>
+
+</body>
+
+</html>

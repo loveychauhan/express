@@ -6,6 +6,7 @@ import path from 'path';
 const app = express();
 
 app.set('view engine', 'ejs');
+app.use(express.json())
 app.use(express.urlencoded({ extended: true })); // must be before router
 
 const mypath = "\\e\\web development bootcamp\\backend/express \\ ejs/node.txt"
