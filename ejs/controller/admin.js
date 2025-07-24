@@ -1,7 +1,7 @@
 
 //this is a controller/admin.js
 import fs from 'fs'
-// console.log(fs)
+import fsp from 'fs/promises'
 
 export const home = (req, res) => {
 
@@ -105,7 +105,6 @@ export const adminPage = (req, res) => {
 };
 
 export const filesystem = async (req, res) => {
-    const data = await fsp.appendFile('./node.txt', '\n\n\n\n\n\nBut i am now a beginner');
     const files = await fsp.readdir('./')
     console.log(files)
     console.log('running')
@@ -115,10 +114,8 @@ export const filesystem = async (req, res) => {
 
 const newData = []
 export const userForm1 = (req, res) => {
-    // newData.push(req.body)
     const obj = req.body
     newData.push(obj)
-    console.log(obj)
     res.render('userForm', { newData })
 }
 
@@ -128,19 +125,36 @@ export const userForm = (req, res) => {
 
 
 export const blog = (req, res) => {
-    res.render('blog.ejs', { newData: {} })
-}
-
-export const showFile = (req, res) => {
-    res.render('')
-}
-
-export const preView = (req, res) => {
-    const { title, description } = req.body
-    fs.writeFile(`./views/${title}.txt`, '', (err) => {
-        console.log(err)
+    fs.readdir("./files", function (err, files) {
+        res.render('blog.ejs', { files })
     })
-    fs.appendFile(`./views`)
-    res.render('blog.ejs', { newData: req.body })
+}
+
+export const preView = async (req, res) => {
+    const { title, description } = req.body
+    let fileName = title.split(' ').join('')
+    if (fileName) {
+        const content = `
+        Title: ${title}
+        Description: ${description}`
+
+        fs.writeFile(`./files/${fileName}.txt`, content, (err) => {
+            console.log(err)
+        })
+
+        const files = await fsp.readdir('./files')
+        res.render('blog.ejs', { files })
+    }
+}
+
+
+export const DynamicRoute = (req, res) => {
+    const fileName = req.params.app
+    res.render('dynanic', { fileName })
+}
+
+export const Rename = (req, res) => {
+    const { oldName } = req.body
+    console.log(oldName)
 }
 

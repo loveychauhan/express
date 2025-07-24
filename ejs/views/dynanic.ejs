@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= fileName%>
+    </title>
+</head>
+
+<body>
+    <a href="/blog"> Go back to home</a>
+    <h1 class="heading">
+        <%= fileName.split('.')[0] %>
+            Blog
+    </h1>
+    <form action="./" method="post" class="renameForm">
+        <label for="">Old name</label>
+        <input type="text" value="<%= fileName %>" class="oldName" name="oldName">
+
+        <label for="">New name</label>
+        <input type="text" class="newName" name="newName">
+        <button type="submit">Update</button>
+    </form>
+
+    <script src="/js/rename.js" type="module"></script>
+</body>
+
+</html>

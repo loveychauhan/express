@@ -24,19 +24,28 @@
     </form>
 
     <div class="w-full max-w-[540px] mx-auto my-5">
-        <%if(newData){%>
-            <h1>
-                <%=newData?.title%>
-                    <a class="text-blue" href='./'>
-                        <%if(newData){%>
-                            ReadMore
-                            <%}%>
-                    </a>
-            </h1>
-            <%}else{%>
-                <h1>no Data Available</h1>
-                <%}%>
+        <%if(files.length> 0){%>
+            <%files.map(function(file) {%>
+                <div class="flex items-center gap-2">
+                    <h1>
+                        <%= file%>
+                    </h1>
+                    <a class="text-blue-300" href='/files/<%= file%>'>Readmore</a>
+                </div>
+                <button class="py-1 text-[12px] px-2.5 bg-amber-300 outline-0 rounded-[10px]">Rename</button>
+                <%})%>
+                    <p>
+                        <!-- <%=files.length%> -->
+                    </p>
+                    <%} else {%>
+                        <h1>no file found</h1>
+                        <%}%>
+
+
     </div>
+
+    <!-- <a class="text-blue-300" href='/files/123'>Readmore</a> -->
+
 
 </body>
 
