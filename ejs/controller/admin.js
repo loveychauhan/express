@@ -2,6 +2,10 @@
 //this is a controller/admin.js
 import fs from 'fs'
 import fsp from 'fs/promises'
+import path from 'path'
+import { dirname } from 'path'
+import { fileURLToPath } from 'url'
+
 
 export const home = (req, res) => {
 
@@ -147,14 +151,41 @@ export const preView = async (req, res) => {
     }
 }
 
-
 export const DynamicRoute = (req, res) => {
     const fileName = req.params.app
     res.render('dynanic', { fileName })
 }
 
 export const Rename = (req, res) => {
-    const { oldName } = req.body
-    console.log(oldName)
-}
+    // const { oldName, newName } = req.body;
+    // res.send(newName);
+
+    // const __fileName = fileURLToPath(import.meta.url)
+    // const __dirname = dirname(__fileName)
+
+    // const folderPath = path.resolve(__dirname, '..', 'files')
+    // const oldPath = path.join(folderPath, oldName)
+    // const newPath = path.join(folderPath, newName)
+
+    // fs.readdir('./files', (err, data) => {
+    //     if (err) console.log(err)
+    //     data.map((file) => {
+    //         if (file === oldName) {
+    //             fs.rename(oldPath, newPath, (err) => {
+    //                 if (err) console.log('cannot rename file name')
+    //             })
+    //         }
+    //     })
+    // })
+
+    fs.readFile(`./files/`, 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error reading file:', err);
+            return;
+        }
+        console.log('File content:', data);
+    });
+    // console.log(req.body)
+};
+
 
