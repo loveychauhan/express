@@ -1,4 +1,5 @@
-import form from "../models/form.js"
+import { form, pinUser } from "../models/form.js"
+import bcrypt from 'bcrypt'
 
 export const register = (req, res) => {
     // console.log('render')
@@ -25,11 +26,96 @@ export const registeration = async (req, res) => {
         })
     }
 
-    const userDoc = new form({
-        name, email, gender, qualification, phone, address, password
+    bcrypt.genSalt(10, function (err, salt) {
+        console.log("salt : ", salt)
+        bcrypt.hash(password, salt, function (err, hash) {
+            console.log(hash)
+            const userDoc = new form({
+                name, email, gender, qualification, phone, address, password: hash
+            })
+            userDoc.save()
+        })
     })
-    userDoc.save()
+
+
+
+    res.redirect("/login")
+}
+
+export const loginData = async (req, res) => {
+    const { email, password } = req.body
+    const user = await form.findOne({ email })
+    if (!user) {
+        return res.json({
+            message: "not registered"
+        })
+    }
+    console.log(user)
+    bcrypt.compare(password, user.password, function (err, result) {
+        console.log(result)
+    })
+
     res.json({
-        message: "saved "
+        message: "done"
+
     })
 }
+
+
+export const pinterestRegister = (req, res) => {
+
+    res.render('pinterestRegister.ejs')
+}
+
+export const pinterestUser = async (req, res) => {
+    const { name, email, password, age, gender } = req.body
+    const user = await pinUser.findOne({ email })
+
+    if (user) {
+        res.json({
+            message: 'already a user'
+        })
+    }
+
+    bcrypt.genSalt(10, function (err, salt) {
+        bcrypt.hash(password, salt, function (err, hash) {
+            const pinData = new pinUser({
+                name, email, gender, age, password: hash
+            })
+            pinData.save()
+        })
+    })
+
+    res.redirect('/pinLogin')
+
+}
+
+export const pinLogin = (req, res) => {
+    res.render('pinLogin.ejs')
+
+}
+
+export const isUser = async (req, res) => {
+    const { email, password } = req.body
+    const user = await pinUser.findOne({
+        email
+    })
+
+    if (!user) {
+        return res.json({
+            message: 'No User Found'
+        })
+    }
+
+    bcrypt.compare(password, user.password, function (err, result) {
+        if (result) {
+            return res.json({
+                email: email,
+                password: password
+            })
+        }
+        res.json({
+            message: 'wrong password'
+        })
+    })
+} 

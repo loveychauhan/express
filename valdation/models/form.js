@@ -10,7 +10,14 @@ const formSchema = new mongoose.Schema({
     qualification: String
 
 })
+const PinSchema = new mongoose.Schema({
+    name: String,
+    password: String,
+    gender: String,
+    email: String,
+    age: String
+})
 
-const form = mongoose.model('form', formSchema)
+export const form = mongoose.model('form', formSchema)
+export const pinUser = mongoose.model('pinUser', PinSchema)
 
-export default form
