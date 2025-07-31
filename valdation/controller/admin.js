@@ -1,5 +1,12 @@
 import { form, pinUser } from "../models/form.js"
+import multer from "multer"
 import bcrypt from 'bcrypt'
+import path from "path"
+import { fileURLToPath } from "url"
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 
 export const register = (req, res) => {
     // console.log('render')
@@ -118,4 +125,26 @@ export const isUser = async (req, res) => {
             message: 'wrong password'
         })
     })
-} 
+}
+
+export const uploadFile = (req, res) => {
+    res.render('fileUpload.ejs')
+}
+
+export const getFile = (req, res) => {
+    console.log('post request')
+    const storage = multer.diskStorage({
+        destination: (req, file, cb) => {
+            cb(null, '__dirname/upload')
+        },
+        filename: (req, file, cb) => {
+            // const salt = Date.now()
+            console.log(req.file)
+            console.log(file)
+            cb(null, req.file.originalname)
+        }
+    })
+    const upload = multer({ storage: storage })
+    // console.log(storage)
+}
+

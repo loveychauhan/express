@@ -6,12 +6,10 @@ import connectDb from './config/db.js';
 const app = express()
 
 app.use(express.urlencoded({ extended: true }));
-
+app.use(express.json())
 
 //db connect
 connectDb();
-
-
 
 app.use(appRouter)
 
