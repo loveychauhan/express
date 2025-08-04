@@ -5,7 +5,7 @@ import Stories from "./Stories";
 const Home = () => {
   return (
     <section>
-      <header className="flex justify-between p-4">
+      <header className="flex justify-between p-4 flex-wrap">
         <div className="w-[150px] h-[150px]  ">
           <img
             className=" w-full h-full rounded-full object-fill  "
@@ -14,8 +14,8 @@ const Home = () => {
           />
         </div>
 
-        <article className="grid items-start ">
-          <div className="flex justify-between items-center gap-2 ">
+        <article className="grid items-start  ">
+          <div className="flex flex-wrap justify-between items-center gap-2 ">
             <p className="mr-3">Lovey</p>
             <Button name="Edit profile" />
             <Button name="View archive" />
@@ -37,7 +37,7 @@ const Home = () => {
           </div>
         </article>
       </header>
-      <div className="flex gap-12 items-center my-8">
+      <div className="flex flex-wrap gap-12 items-center my-8">
         <Stories />
         <Stories />
         <Stories />
